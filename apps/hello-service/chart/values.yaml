@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: 127.0.0.1:5000/hello-service
+  tag: "1.0.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+env:
+  ENVIRONMENT: dev

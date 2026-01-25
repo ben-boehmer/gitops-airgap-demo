@@ -1,0 +1,6 @@
+apiVersion: v2
+name: hello-service
+description: A tiny hello service deployed via GitOps
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
