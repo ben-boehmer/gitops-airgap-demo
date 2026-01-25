@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: REPLACE_WITH_YOUR_GIT_REPO_URL
+    repoURL: https://github.com/ben-boehmer/gitops-airgap-demo.git
     targetRevision: HEAD
     path: apps/hello-service/chart
     helm:
