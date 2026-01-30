@@ -1,9 +1,13 @@
-from flask import Flask
 import os
+from flask import Flask
 
 app = Flask(__name__)
 
 @app.get("/")
 def hello():
-    env = os.getenv("ENVIRONMENT", "dev")
-    return {"service": "hello-service", "env": env, "status": "ok"}
+    return "hello\n"
+
+@app.get("/secret")
+def secret():
+    # DEMO ONLY: secrets niemals offen in Produktion ausgeben
+    return f"SECRET_VALUE={os.getenv('SECRET_VALUE', 'MISSING')}\n"

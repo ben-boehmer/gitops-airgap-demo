@@ -12,12 +12,18 @@ spec:
       labels:
         app: hello-service
     spec:
+      serviceAccountName: hello-service
       containers:
-      - name: hello-service
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        ports:
-        - containerPort: 8080
-        env:
-        - name: ENVIRONMENT
-          value: "{{ .Values.env.ENVIRONMENT }}"
+        - name: hello-service
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ENVIRONMENT
+              value: "{{ .Values.env.ENVIRONMENT }}"
+            - name: SECRET_VALUE
+              valueFrom:
+                secretKeyRef:
+                  name: hello-service-secret
+                  key: SECRET_VALUE
