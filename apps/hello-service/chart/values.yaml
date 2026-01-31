@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 127.0.0.1:5000/hello-service
+  repository: hello-service
   tag: "0.1.0"
   pullPolicy: IfNotPresent
 
