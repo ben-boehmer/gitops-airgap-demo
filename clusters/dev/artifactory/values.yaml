@@ -1,0 +1,71 @@
+# ------------------------------------------------------------
+# Artifactory – DEV / kind
+# ------------------------------------------------------------
+
+artifactory:
+  replicaCount: 1
+
+  ## Ressourcen bewusst begrenzen (kind!)
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "2Gi"
+    limits:
+      cpu: "2"
+      memory: "4Gi"
+
+  ## Service intern erreichbar
+  service:
+    type: ClusterIP
+    port: 8081
+
+  ## Persistenter Storage für Artifacts
+  persistence:
+    enabled: true
+    size: 20Gi
+    accessMode: ReadWriteOnce
+    mountPath: /var/opt/jfrog/artifactory
+
+  ## Kein Ingress für dev (Port-Forward reicht)
+  ingress:
+    enabled: false
+
+# ------------------------------------------------------------
+# Datenbank
+# ------------------------------------------------------------
+## Für DEV ok: interne PostgreSQL
+## Für PROD: externe DB verwenden!
+postgresql:
+  enabled: true
+  auth:
+    username: artifactory
+    password: artifactory
+    database: artifactory
+  primary:
+    persistence:
+      enabled: true
+      size: 10Gi
+
+# ------------------------------------------------------------
+# Security / Keys
+# ------------------------------------------------------------
+## DEV-Werte – für PROD UNBEDINGT ersetzen
+artifactory:
+  masterKey: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+  joinKey: "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+
+# ------------------------------------------------------------
+# JVM / Java Tuning (wichtig!)
+# ------------------------------------------------------------
+artifactory:
+  javaOpts:
+    xms: "1g"
+    xmx: "2g"
+
+# ------------------------------------------------------------
+# Logging
+# ------------------------------------------------------------
+artifactory:
+  loggers:
+    accessLog:
+      enabled: true

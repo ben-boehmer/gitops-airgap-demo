@@ -1,0 +1,35 @@
+# clusters/child/artifactory/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: artifactory
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: artifactory
+  source:
+    repoURL: https://charts.jfrog.io
+    chart: artifactory
+    targetRevision: "*"   # besser später pinnen (z.B. 107.x / konkrete Version)
+    helm:
+      valueFiles:
+        - values.yaml
+  # values.yaml kommt aus deinem Git – daher nutzt du "ref" Quelle:
+  sources:
+    - repoURL: https://charts.jfrog.io
+      chart: artifactory
+      targetRevision: "*"
+      helm:
+        valueFiles:
+          - $values/clusters/child/artifactory/values.yaml
+    - repoURL: <DEIN_GITOPS_REPO_URL>
+      targetRevision: main
+      ref: values
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
