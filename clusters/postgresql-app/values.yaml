@@ -1,0 +1,30 @@
+# clusters/dev/postgresql/values.yaml
+postgresql:
+  replicaCount: 1   # für kind/dev klein halten (prod typischerweise 2-3)
+
+  postgresqlPassword: "CHANGE_ME_IN_SECRET"
+  username: "artifactory"
+  password: "CHANGE_ME_IN_SECRET"
+  database: "artifactory"
+
+  resources:
+    requests:
+      cpu: "250m"
+      memory: "512Mi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+
+  persistence:
+    enabled: true
+    size: 10Gi
+
+pgpool:
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
