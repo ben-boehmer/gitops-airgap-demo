@@ -1,10 +1,71 @@
-# Projektstruktur – Überblick
+# GitOps Demo – Kubernetes Deployment mit ArgoCD 🚀
 
-Dieses Repository folgt einer GitOps-orientierten Struktur, die **Anwendungscode**,
-**Deployment-Templates** und **umgebungsspezifischen Zustand** klar voneinander trennt.
+Dieses Projekt demonstriert den Aufbau und Betrieb einer containerisierten Anwendung
+unter Verwendung moderner GitOps-Prinzipien.
 
-Der Aufbau ist auf lokale Entwicklung (kind), ArgoCD-basierte GitOps-Deployments
-und gute Nachvollziehbarkeit ausgelegt. Es wurde auch **Vault** mit eingeabeitet
+Der Fokus liegt auf:
+- deklarativen Deployments mit ArgoCD
+- Trennung von Anwendung, Deployment und Infrastruktur
+- reproduzierbaren Umgebungen (kind)
+- sicherem Secret-Handling mit Vault
+
+## 🎯 Ziel des Projekts
+
+Dieses Projekt demonstriert den Aufbau und Betrieb einer containerisierten Fullstack-Anwendung unter Berücksichtigung moderner DevOps- und GitOps-Prinzipien.
+
+Der Fokus liegt auf:
+- reproduzierbaren Deployments
+- klarer Trennung von Infrastruktur und Anwendung
+- automatisierbaren Workflows mit Shellscripten
+- Runbooks für den täglichen Gebrauch
+
+## 🏛️ Relevanz für die Verwaltung
+
+Dieses Projekt zeigt, wie moderne Deployment-Strategien genutzt werden können, um:
+
+- Systeme stabil und reproduzierbar zu betreiben
+- Änderungen nachvollziehbar und revisionssicher zu machen
+- manuelle Eingriffe zu minimieren
+
+Dies ist besonders relevant für langfristig betriebene Systeme im öffentlichen Sektor.
+
+## 🏗️ Architektur (vereinfacht)
+
+Git Repository
+   ↓
+ArgoCD
+   ↓
+Kubernetes Cluster (kind / später produktiv)
+   ↓
+Hello-Service + PostgreSQL
+
+## 🚀 Quickstart
+
+### 1. Cluster erstellen
+```bash
+./scripts/create-cluster.sh
+```
+
+### 2. ArgoCD bootstrappen
+```bash
+./scripts/bootstrap-argocd.sh
+```
+
+### 🔁 3. GitOps Workflow
+
+1. Änderungen werden im Git-Repository vorgenommen
+2. ArgoCD erkennt Änderungen automatisch
+3. Der Cluster wird an den gewünschten Zustand angepasst
+
+Es findet kein manuelles Deployment statt.
+
+## 🔐 Secret Management mit Vault
+
+- Anwendung erhält nur minimal notwendige Rechte (Least Privilege)
+- Secrets werden nicht im Repository gespeichert
+- Integration erfolgt über External Secrets
+
+Ziel: sichere und nachvollziehbare Konfiguration
 
 ---
 
@@ -174,3 +235,14 @@ Diese Skripte sind bewusst **nicht Teil des GitOps-Zustands**.
 
 ---
 
+## 📚 Learnings
+
+- Umsetzung eines GitOps-Workflows mit ArgoCD
+- Strukturierung von Repositories für GitOps
+- Trennung von Anwendung, Deployment und Cluster-Zustand
+- Integration von Secret-Management (Vault)
+- Nutzung von kind für lokale Entwicklung
+
+## 👨‍💻 Motivation
+
+Ich interessiere mich besonders für den stabilen und nachvollziehbaren Betrieb von Software-Systemen. Dieses Projekt ist ein praktischer Schritt, um GitOps-Prinzipien nicht nur zu verstehen, sondern konkret umzusetzen.
