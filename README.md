@@ -4,7 +4,7 @@ Dieses Repository folgt einer GitOps-orientierten Struktur, die **Anwendungscode
 **Deployment-Templates** und **umgebungsspezifischen Zustand** klar voneinander trennt.
 
 Der Aufbau ist auf lokale Entwicklung (kind), ArgoCD-basierte GitOps-Deployments
-und gute Nachvollziehbarkeit ausgelegt.
+und gute Nachvollziehbarkeit ausgelegt. Es wurde auch **Vault** mit eingeabeitet
 
 ---
 
